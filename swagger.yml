@@ -14,7 +14,7 @@ basePath: /api
 paths:
   /pairing:
     get:
-      operationId: main.read_all
+      operationId: winePairing.read_all
       tags:
         - WinePairing
       summary: Read the entire list of Wine Cheese Pairings
@@ -51,7 +51,7 @@ paths:
                   type: string
 
     post:
-      operationId: main.create
+      operationId: winePairing.create
       tags:
         - WinePairing
       summary: Create a wine pairing and add it
@@ -82,7 +82,7 @@ paths:
 
   /pairing/{id}:
     get:
-      operationId: main.read_one
+      operationId: winePairing.read_one
       tags:
         - WinePairing
       summary: Read one wine pairing
@@ -112,7 +112,7 @@ paths:
                   type: string
 
     put:
-      operationId: main.update
+      operationId: winePairing.update
       tags:
         - WinePairing
       summary: Update a wine pairing
@@ -145,7 +145,7 @@ paths:
           description: Successfully updated wine pairing
 
     delete:
-      operationId: main.delete
+      operationId: winePairing.delete
       tags:
         - WinePairing
       summary: Delete a wine pairing

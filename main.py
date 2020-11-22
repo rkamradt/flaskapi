@@ -3,15 +3,11 @@ import time
 
 from flask import Flask, render_template, url_for, redirect
 from flask_cors import CORS
-from flask_oidc import OpenIDConnect
 
 import connexion
 
 # Create the application instance
 app = connexion.FlaskApp(__name__, specification_dir='./')
-
-# Read the swagger.yml file to configure the endpoints
-app.add_api('swagger.yml')
 
 CORS(app.app)
 app.app.config.update({
@@ -21,35 +17,8 @@ app.app.config.update({
     'OIDC_SCOPES': ["openid", "profile", "email"],
     'OIDC_CALLBACK_ROUTE': '/authorization-code/callback'
 })
-
-
-
-oidc = OpenIDConnect(app.app)
-
-
-@app.route("/")
-def home():
-    return "Hello!  There's not much to see here." \
-           "Please grab one of our front-end samples for use with this sample resource server"
-
-
-@app.route("/api/messages")
-@oidc.accept_token(True)
-def messages():
-    response = {
-        'messages': [
-            {
-                'date': time.time(),
-                'text': 'I am a robot.'
-            },
-            {
-                'date': time.time()-3600,
-                'text': 'Hello, World!'
-            }
-        ]
-    }
-
-    return json.dumps(response)
+# Read the swagger.yml file to configure the endpoints
+app.add_api('swagger.yml')
 
 if __name__ == '__main__':
     app.run(host="localhost", port=8000, debug=True)
