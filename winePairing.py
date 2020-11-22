@@ -20,4 +20,4 @@ def update(id):
 
 @oidc.accept_token(True)
 def delete(id):
-    getOidc().accept_token(True)(lambda id: "this is where we delete")
+    return "this is where we delete"
