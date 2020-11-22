@@ -1,0 +1,11 @@
+version: "3"
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    volumes:
+     - ./init:/docker-entrypoint-initdb.d
+    env_file:
+      - ../mariadb.env
+    ports:
+      - 3306:3306

@@ -1,0 +1,160 @@
+swagger: "2.0"
+info:
+  description: Wine Cheese Pairing API Swagger
+  version: "1.0.0"
+  title: Wine Cheese Pairing API
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /pairing:
+    get:
+      operationId: main.read_all
+      tags:
+        - WinePairing
+      summary: Read the entire list of Wine Cheese Pairings
+      description: Read the list of Wine Cheese Pairings
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of Wine Cheese Pairings to get
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning
+          required: false
+      responses:
+        200:
+          description: Successfully read list operation
+          schema:
+            type: array
+            items:
+              properties:
+                id:
+                  type: integer
+                wine:
+                  type: string
+                wine_descrption:
+                  type: string
+                cheese:
+                  type: string
+                cheese_descrption:
+                  type: string
+                pairing_notes:
+                  type: string
+
+    post:
+      operationId: main.create
+      tags:
+        - WinePairing
+      summary: Create a wine pairing and add it
+      description: Create a new wine pairing
+      parameters:
+        - name: pairing
+          in: body
+          description: Pairing to create
+          required: True
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                wine:
+                  type: string
+                wine_descrption:
+                  type: string
+                cheese:
+                  type: string
+                cheese_descrption:
+                  type: string
+                pairing_notes:
+                  type: string
+      responses:
+        201:
+          description: Successfully created wine pairing
+
+  /pairing/{id}:
+    get:
+      operationId: main.read_one
+      tags:
+        - WinePairing
+      summary: Read one wine pairing
+      description: Read one wine pairing
+      parameters:
+        - name: id
+          in: path
+          description: Id of the pairing
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read wine pairing
+          schema:
+            properties:
+                id:
+                  type: integer
+                wine:
+                  type: string
+                wine_descrption:
+                  type: string
+                cheese:
+                  type: string
+                cheese_descrption:
+                  type: string
+                pairing_notes:
+                  type: string
+
+    put:
+      operationId: main.update
+      tags:
+        - WinePairing
+      summary: Update a wine pairing
+      description: Update a wine pairing
+      parameters:
+        - name: id
+          in: path
+          description: Id of the wine pairing to update
+          type: integer
+          required: True
+        - name: person
+          in: body
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                wine:
+                  type: string
+                wine_descrption:
+                  type: string
+                cheese:
+                  type: string
+                cheese_descrption:
+                  type: string
+                pairing_notes:
+                  type: string
+      responses:
+        200:
+          description: Successfully updated wine pairing
+
+    delete:
+      operationId: main.delete
+      tags:
+        - WinePairing
+      summary: Delete a wine pairing
+      description: Delete a wine pairing
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a wine pairing
