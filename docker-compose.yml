@@ -9,3 +9,9 @@ services:
       - ../mariadb.env
     ports:
       - 3306:3306
+  api:
+    image: rlkamradt/winepairingapi
+    volumes:
+    - ../config:/project/config
+    ports:
+      - 5000:5000
